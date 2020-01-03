@@ -14,14 +14,8 @@ library(cowplot)
 library(Hmisc)
 library(plyr)
 
-exp = 2 #change this according to which plot you want to do 
 
-#load in data
-if (exp==1){
-  dat = fread("/Users/neil/GitHubRepo/Projects/PreySelection/v103/data/acceptance_rates_103.csv")
-} else if (exp ==2){
-  dat = fread("/Users/neil/GitHubRepo/Projects/PreySelection/v104/data/acceptance_rates_104.csv")
-}
+dat = fread("/Users/neil/GitHubRepo/Projects/PreySelection/v105/data/acceptance_rates_105.csv")
 
 #code order_condition as factor
 dat$order_condition = as.factor(dat$order_condition)  
@@ -38,15 +32,9 @@ dat[order_condition=="poorrich", mean(acceptance_change)]
 data_summary = dat[, .(means = mean(acceptance_change), sem = sd(acceptance_change)/.N), by=order_condition]
 
 
-if (exp==1){
-  title_text = "Order Effect: Experiment 1"
+  title_text = "Order Effect: Experiment 3"
   min_y = -0.3
   max_y = 0.6
-} else if (exp==2){
-  title_text = "Order Effect: Experiment 2"
-  min_y = -0.3
-  max_y = 0.6
-}
 
 #plot
 p1 <- ggplot(data = data_summary, aes(x = order_condition, y = means)) +
