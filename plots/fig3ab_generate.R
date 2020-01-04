@@ -14,7 +14,7 @@ library(cowplot)
 library(Hmisc)
 library(plyr)
 
-exp = 2 #change this according to which plot you want to do 
+exp = 1 #change this according to which plot you want to do 
 
 #load in data
 if (exp==1){
@@ -40,8 +40,8 @@ data_summary = dat[, .(means = mean(acceptance_change), sem = sd(acceptance_chan
 
 if (exp==1){
   title_text = "Order Effect: Experiment 1"
-  min_y = -0.3
-  max_y = 0.6
+  min_y = -0.2
+  max_y = 0.4
 } else if (exp==2){
   title_text = "Order Effect: Experiment 2"
   min_y = -0.3

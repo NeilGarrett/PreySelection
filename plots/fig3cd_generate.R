@@ -14,7 +14,7 @@ library(cowplot)
 library(Hmisc)
 library(plyr)
 
-exp = 2 #change this according to which plot you want to do 
+exp = 1 #change this according to which plot you want to do 
 
 #load in data
 if (exp==1){
@@ -58,8 +58,7 @@ col_palette = c("#D4EFDF", "#D6EAF8")
 p1 <- ggplot(data = data_summary, aes(x = model, y = means, fill=model)) +
   geom_bar(stat = "identity", width = .5, position="dodge", colour="black") +
   geom_errorbar(data = data_summary, aes(ymin = means-sem, ymax = means+sem), position = position_dodge(width = .5), width=0.25)+
-  geom_point(data = data_individual, aes(x = model, y = liks), alpha = 0.2, size = 3, position = position_dodge(width=0.5)) +
-  geom_point(data = data_individual, aes(x = model, y = liks, fill = model), colour = "black", alpha = 0.2, size = 3, position = position_dodge(width=0.5)) +
+  geom_point(data = data_individual, aes(x = model, y = liks, colour = model), stroke = 1, colour = "black", alpha = 0.2, size = 1.5, pch=21, position = position_jitterdodge(dodge.width=0.5)) +
   coord_flip()+
   ylab("Model Scores \n (Leave one out cross validation)")+
   theme_cowplot()+
@@ -67,6 +66,6 @@ p1 <- ggplot(data = data_summary, aes(x = model, y = means, fill=model)) +
   ggtitle(title_text)+
   scale_fill_manual(values=col_palette)+
   scale_y_continuous(expand = c(0,0), limits = c(0, maxy))+
-  theme(axis.text=element_text(size=8), axis.title=element_text(size=15, face="bold"), plot.title = element_text(size = 10, face = "bold"))
+  theme(axis.text=element_text(size=8), axis.title=element_text(size=8, face="bold"), plot.title = element_text(size = 10, face = "bold"))
 
 p1

@@ -94,8 +94,7 @@ if (exp==1){
 p1 <- ggplot(data = data_summary[rank != "HRHD" & rank != "LRLD"], aes(x = rank, y = acceptance_rates, fill=block)) +
   geom_bar(stat = "identity", width = .5, position="dodge") +
   geom_errorbar(data = data_summary[rank != "HRHD" & rank != "LRLD"], aes(ymin = acceptance_rates-sem, ymax = acceptance_rates+sem), position = position_dodge(width = .5), width=0.25) + 
-  geom_point(data = data_individual[rank != "HRHD" & rank != "LRLD"], aes(x = rank, y = percent_accept, colour = block), alpha = 0.2, size = 1, position = position_dodge(width=0.5)) +
-  geom_point(data = data_individual[rank != "HRHD" & rank != "LRLD"], aes(x = rank, y = percent_accept, fill = block), colour = "black", alpha = 0.2, size = 1, position = position_dodge(width=0.5)) +
+  geom_point(data = data_individual[rank != "HRHD" & rank != "LRLD"], aes(x = rank, y = percent_accept, colour = block), stroke = 1, colour = "black", alpha = 0.2, size = 1.5, pch=21, position = position_jitterdodge(dodge.width=0.5)) +
   scale_color_manual(values = c('rich' = 'blue', 'poor' = 'red'))+
   ylab("accept %") +
   xlab("option") +
@@ -103,7 +102,7 @@ p1 <- ggplot(data = data_summary[rank != "HRHD" & rank != "LRLD"], aes(x = rank,
   theme(legend.position="none")+
   ggtitle(title_text)+
   scale_fill_brewer(palette="Set1", direction=-1)+
-  theme(axis.text=element_text(size=8), axis.title=element_text(size=15, face="bold"), plot.title = element_text(size = 10, face = "bold"))
+  scale_y_continuous(limits = c(0, 1))+
+  theme(axis.text=element_text(size=15), axis.title=element_text(size=15, face="bold"), plot.title = element_text(size = 10, face = "bold"))
 
 p1
-

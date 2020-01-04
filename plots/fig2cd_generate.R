@@ -53,14 +53,14 @@ if (exp==1){
 p1 <- ggplot(data = within_AB, aes(x = previous_option, y = acceptance_rate)) +
   geom_bar(stat = "identity", width = .5, position="dodge") +
   geom_errorbar(data = within_AB, aes(ymin = acceptance_rate-sem, ymax = acceptance_rate+sem), position = position_dodge(width = .5), width=0.25) + 
-  geom_point(data = data_individual, aes(x = previous_option, y = acceptance_rate), alpha = 0.2, size = 4, position = position_dodge(width=0.5)) +
-  ylab("accept % (trial t)") +
-  xlab("option (trial t-1)") +
+  geom_point(data = data_individual, aes(x = previous_option, y = acceptance_rate, fill="grey"), alpha = 0.2, size = 4, position = position_jitterdodge(dodge.width=0.5)) +
+  ylab("accept % \n (trial t)") +
+  xlab("option \n (trial t-1)") +
   theme_cowplot()+
   ggtitle(title_text)+
   scale_fill_brewer(palette="Set1", direction=-1)+
   ylim(0.0,1.0)+ 
   theme(legend.position="none")+
-  theme(axis.text=element_text(size=8), axis.title=element_text(size=15, face="bold"), plot.title = element_text(size = 10, face = "bold"))
+  theme(axis.text=element_text(size=15), axis.title=element_text(size=15, face="bold"), plot.title = element_text(size = 10, face = "bold"))
 
 p1
