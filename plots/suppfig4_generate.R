@@ -19,13 +19,11 @@ exp = 1 #change this according to which plot you want to do
 #load in data
 if (exp==1){
   dat = fread("/Users/neil/GitHubRepo/Projects/PreySelection/v103/data/acceptance_rates_103.csv")
-  dat_sims_symmetric = data.table(order_condition = as.factor(c("poorrich", "richpoor")), means = c(0.1085, 0.1131), sem = c(7.58E-04, 7.60E-04))
-  dat_sims_asymmetric = data.table(order_condition = as.factor(c("poorrich", "richpoor")), means = c(0.1817, 0.0359), sem = c(7.37E-04, 8.11E-04))
+  dat_sims_persev = data.table(order_condition = as.factor(c("poorrich", "richpoor")), means = c(0.1142, 0.1161), sem = c(7.5309e-04, 7.6501e-04))
 
 } else if (exp ==2){
   dat = fread("/Users/neil/GitHubRepo/Projects/PreySelection/v104/data/acceptance_rates_104.csv")
-  dat_sims_symmetric = data.table(order_condition = as.factor(c("poorrich", "richpoor")), means = c(0.1154, 0.118), sem = c(7.85E-04, 7.64E-04))
-  dat_sims_asymmetric = data.table(order_condition = as.factor(c("poorrich", "richpoor")), means = c(0.1841, 0.011), sem = c(6.91E-04, 7.59E-04))
+  dat_sims_persev = data.table(order_condition = as.factor(c("poorrich", "richpoor")), means = c(0.1136, 0.1129), sem = c(7.7896e-04, 7.6239e-04))
 
 }
 
@@ -70,10 +68,8 @@ p1 <- ggplot(data = data_summary, aes(x = order_condition, y = means)) +
   ylim(min_y, max_y)+
   scale_fill_brewer(palette="Set1", direction=-1)+
   theme(axis.text=element_text(size=20), axis.title=element_text(size=15, face="bold"), plot.title = element_text(size = 10, face = "bold"))+
-  geom_point(data=dat_sims_symmetric[, .(order_condition, means)], colour="#D4EFDF", shape = "square", size = 5, alpha = 0.85, position = "identity")+
-  geom_point(data=dat_sims_asymmetric[, .(order_condition, means)], colour="#D6EAF8", shape = "triangle", size = 5, alpha = 0.85, position = "identity")
-  #geom_errorbar(data = dat_sims_symmetric, aes(ymin = means-sem, ymax = means+sem), position = position_dodge(width = .05), width=0.05)+
-  #geom_errorbar(data = dat_sims_asymmetric, aes(ymin = means-sem, ymax = means+sem), position = position_dodge(width = .05), width=0.05)
+  geom_point(data=dat_sims_persev[, .(order_condition, means)], colour="green", shape = "circle", size = 5, alpha = 0.85, position = "identity")
+  #geom_errorbar(data = dat_sims_persev, aes(ymin = means-sem, ymax = means+sem), position = position_dodge(width = .05), width=0.05)+
 
 p1
 

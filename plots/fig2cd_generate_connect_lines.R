@@ -14,7 +14,7 @@ library(cowplot)
 library(Hmisc)
 library(plyr)
 
-exp = 2 #change this according to which plot you want to do 
+exp = 1 #change this according to which plot you want to do 
 
 #load in data
 if (exp==1){
@@ -50,10 +50,15 @@ if (exp==1){
   title_text = "Within Block Effects: Experiment 2"
 }
 
+
 p1 <- ggplot(data = within_AB, aes(x = previous_option, y = acceptance_rate)) +
   geom_bar(stat = "identity", width = .5, position="dodge") +
   geom_errorbar(data = within_AB, aes(ymin = acceptance_rate-sem, ymax = acceptance_rate+sem), position = position_dodge(width = .5), width=0.25) + 
-  geom_point(data = data_individual, aes(x = previous_option, y = acceptance_rate, fill="grey"), alpha = 0.5, size = 2, position = position_jitterdodge(dodge.width=0.5)) +
+  #geom_point(data = data_individual, aes(x = previous_option, y = acceptance_rate, fill="grey"), alpha = 0.5, size = 2, position = position_jitterdodge(dodge.width=0.5)) +
+  #geom_point(data = data_individual, aes(x = previous_option, y = acceptance_rate, fill="grey", group=subs), alpha = 0.5, size = 2, position = pd) +
+  geom_point(data = data_individual, aes(x = previous_option, y = acceptance_rate, fill="grey"), alpha = 0.5, size = 2) +
+  geom_line(data = data_individual, aes(group=subs), alpha=0.3, size = 0.3)+
+  #geom_line(data = data_individual, aes(group=subs), alpha=0.3, size = 0.3, position = pd)+
   ylab("accept % \n (trial t)") +
   xlab("option \n (trial t-1)") +
   theme_cowplot()+
@@ -64,3 +69,8 @@ p1 <- ggplot(data = within_AB, aes(x = previous_option, y = acceptance_rate)) +
   theme(axis.text=element_text(size=15), axis.title=element_text(size=15, face="bold"), plot.title = element_text(size = 10, face = "bold"))
 
 p1
+
+
+
+#pd <- position_dodge(0.4)
+

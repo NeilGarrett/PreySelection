@@ -14,14 +14,8 @@ library(cowplot)
 library(Hmisc)
 library(plyr)
 
-exp = 2 #change this according to which plot you want to do 
 
-#load in data
-if (exp==1){
-  dat = fread("/Users/neil/GitHubRepo/Projects/PreySelection/v103/data/acceptance_rates_103.csv")
-} else if (exp ==2){
-  dat = fread("/Users/neil/GitHubRepo/Projects/PreySelection/v104/data/acceptance_rates_104.csv")
-}
+dat = fread("/Users/neil/GitHubRepo/Projects/PreySelection/v105/data/acceptance_rates_105.csv")
 
 data_individual = melt(dat[, .(best = accept_AB_prev1, intermediate = accept_AB_prev23, worst = accept_AB_prev4)], 
                        measure.vars = c("best", "intermediate", "worst"), 
@@ -44,11 +38,7 @@ within_AB_sem = melt(dat[, .(best = sd(accept_AB_prev1)/(sqrt(.N)), intermediate
 
 within_AB = merge(within_AB_means, within_AB_sem, all=TRUE)
 
-if (exp==1){
-  title_text = "Within Block Effects: Experiment 1"
-} else if (exp==2){
-  title_text = "Within Block Effects: Experiment 2"
-}
+title_text = "Within Block Effects: Experiment 3"
 
 p1 <- ggplot(data = within_AB, aes(x = previous_option, y = acceptance_rate)) +
   geom_bar(stat = "identity", width = .5, position="dodge") +

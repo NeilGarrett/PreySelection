@@ -40,14 +40,15 @@ data_summary = dat[, .(means = mean(acceptance_change), sem = sd(acceptance_chan
 p1 <- ggplot(data = data_summary, aes(x = order_condition, y = means)) +
   geom_bar(stat = "identity", width = .5, position="dodge") +
   geom_errorbar(data = data_summary, aes(ymin = means-sem, ymax = means+sem), position = position_dodge(width = .5), width=0.25) + 
-  geom_jitter(data = dat, aes(x = order_condition, y = acceptance_change), alpha = 0.2, size = 3, width=0.075) +
-  ylab("Change in acceptance rates \n (Poor - Rich ") +
+  geom_jitter(data = dat, aes(x = order_condition, y = acceptance_change), alpha = 0.5, size = 1, width=0.075) +
+  ylab("Change in acceptance rates \n (Poor - Rich environment) ") +
+  xlab("order condition") +
   theme_cowplot()+
   theme(legend.position="none")+
   ggtitle(title_text)+
   ylim(min_y, max_y)+
   scale_fill_brewer(palette="Set1", direction=-1)+
-  theme(axis.text=element_text(size=8), axis.title=element_text(size=15, face="bold"), plot.title = element_text(size = 10, face = "bold"))
+  theme(axis.text=element_text(size=15), axis.title=element_text(size=15, face="bold"), plot.title = element_text(size = 10, face = "bold"))
 
 p1
 
