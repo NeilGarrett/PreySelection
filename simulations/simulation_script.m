@@ -17,11 +17,12 @@ n_eta = input('n learning rates (1=symmetric model; 2=asymmetric model): ');
 n_iterations = 40;
 
 %number of runs
-n_sims = 1000;
+n_sims = 100;
 
 %initial Q
 if experiment_v==103
     inital_Q = 8.21; %exp 1else
+
 elseif experiment_v==104
     inital_Q = 7.77; %exp 2
 end

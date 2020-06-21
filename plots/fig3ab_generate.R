@@ -41,7 +41,7 @@ dat[order_condition=="richpoor", mean(acceptance_change)]
 dat[order_condition=="poorrich", mean(acceptance_change)]
 
 #combine the summary stats into one
-data_summary = dat[, .(means = mean(acceptance_change), sem = sd(acceptance_change)/.N), by=order_condition]
+data_summary = dat[, .(means = mean(acceptance_change), sem = sd(acceptance_change)/sqrt(.N)), by=order_condition]
 
 if (exp==1){
   title_text = "Order Effect: Experiment 1"
@@ -72,8 +72,6 @@ p1 <- ggplot(data = data_summary, aes(x = order_condition, y = means)) +
   theme(axis.text=element_text(size=20), axis.title=element_text(size=15, face="bold"), plot.title = element_text(size = 10, face = "bold"))+
   geom_point(data=dat_sims_symmetric[, .(order_condition, means)], colour="#D4EFDF", shape = "square", size = 5, alpha = 0.85, position = "identity")+
   geom_point(data=dat_sims_asymmetric[, .(order_condition, means)], colour="#D6EAF8", shape = "triangle", size = 5, alpha = 0.85, position = "identity")
-  #geom_errorbar(data = dat_sims_symmetric, aes(ymin = means-sem, ymax = means+sem), position = position_dodge(width = .05), width=0.05)+
-  #geom_errorbar(data = dat_sims_asymmetric, aes(ymin = means-sem, ymax = means+sem), position = position_dodge(width = .05), width=0.05)
 
 p1
 

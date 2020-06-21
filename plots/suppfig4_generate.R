@@ -14,7 +14,7 @@ library(cowplot)
 library(Hmisc)
 library(plyr)
 
-exp = 1 #change this according to which plot you want to do 
+exp = 2 #change this according to which plot you want to do 
 
 #load in data
 if (exp==1){
@@ -39,7 +39,7 @@ dat[order_condition=="richpoor", mean(acceptance_change)]
 dat[order_condition=="poorrich", mean(acceptance_change)]
 
 #combine the summary stats into one
-data_summary = dat[, .(means = mean(acceptance_change), sem = sd(acceptance_change)/.N), by=order_condition]
+data_summary = dat[, .(means = mean(acceptance_change), sem = sd(acceptance_change)/sqrt(.N)), by=order_condition]
 
 if (exp==1){
   title_text = "Order Effect: Experiment 1"

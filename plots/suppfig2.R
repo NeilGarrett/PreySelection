@@ -15,8 +15,6 @@ library(Hmisc)
 library(plyr)
 
 #load in data
-#block=0=rich
-#block=1=poor
 dat = fread("/Users/neil/GitHubRepo/Projects/PreySelection/v104/models/model_asymmetric/reward_rate_extract.csv")
 
 dat$block = as.factor(dat$block)

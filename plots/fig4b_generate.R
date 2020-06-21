@@ -29,7 +29,7 @@ dat[order_condition=="richpoor", mean(acceptance_change)]
 dat[order_condition=="poorrich", mean(acceptance_change)]
 
 #combine the summary stats into one
-data_summary = dat[, .(means = mean(acceptance_change), sem = sd(acceptance_change)/.N), by=order_condition]
+data_summary = dat[, .(means = mean(acceptance_change), sem = sd(acceptance_change)/sqrt(.N)), by=order_condition]
 
 
   title_text = "Order Effect: Experiment 3"

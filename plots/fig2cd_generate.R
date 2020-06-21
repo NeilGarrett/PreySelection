@@ -14,7 +14,7 @@ library(cowplot)
 library(Hmisc)
 library(plyr)
 
-exp = 2 #change this according to which plot you want to do 
+exp = 1 #change this according to which plot you want to do 
 
 #load in data
 if (exp==1){
@@ -35,12 +35,11 @@ within_AB_means = melt(dat[, .(best = mean(accept_AB_prev1), intermediate = mean
                        variable.name = c("previous_option"), 
                        value.name = c("acceptance_rate"))
 
-#within_AB_means = dat[, .(best = mean(accept_AB_prev1), intermediate = mean(accept_AB_prev23), worst = mean(accept_AB_prev4))]
-
 within_AB_sem = melt(dat[, .(best = sd(accept_AB_prev1)/(sqrt(.N)), intermediate = sd(accept_AB_prev23)/(sqrt(.N)), worst = sd(accept_AB_prev4)/(sqrt(.N)))],
                        measure.vars = c("best", "intermediate", "worst"),
-                       variable.name = c("previous_option"), 
+                       variable.name = c("previous_option"),
                        value.name = c("sem"))
+
 
 within_AB = merge(within_AB_means, within_AB_sem, all=TRUE)
 
